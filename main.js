@@ -3,14 +3,14 @@ if(!db_sistema){
     alert('Lo siento tu navegado NO soporta BD locales.');
 }
 var app = new Vue({
-    el: '#appCliente',
+    el: '#appRegistroAcademico',
     data: {
-        clientes: [],
+        alumnos: [],
         buscar: '',
-        cliente: {
+        alumno: {
             accion: 'nuevo',
             msg : '',
-            idCliente: '',
+            idAlumno: '',
             codigo: '',
             nombre: '',
             direccion: '',
@@ -19,15 +19,15 @@ var app = new Vue({
         },
     },
     methods: {
-        buscarCliente(){
+        buscarAlumno(){
             /*if( this.buscar.trim().length>0 ){
                 this.clientes = this.clientes.filter(item=>item.nombre.toLowerCase().indexOf(this.buscar.toLowerCase())>=0);
             } else {
                 this.obtenerClientes();
             }*/
-            this.obtenerClientes(this.buscar);
+            this.obtenerAlumno(this.buscar);
         },
-        guardarCliente(){
+        guardarAlumno(){
             let sql = '',
                 parametros = [];
             if(this.cliente.accion == 'nuevo'){
@@ -53,18 +53,18 @@ var app = new Vue({
                 });
             });
         },
-        modificarCliente(cliente){
+        modificarAlumno(alumno){
             this.cliente = cliente;
             this.cliente.accion = 'modificar';
         },
-        eliminarCliente(cliente){
+        eliminarAlumno(alumno){
             if( confirm(`¿Esta seguro de eliminar el cliente ${cliente.nombre}?`) ){
                 this.cliente.idCliente = cliente.idCliente;
                 this.cliente.accion = 'eliminar';
                 this.guardarCliente();
             }
         },
-        obtenerClientes(busqueda=''){
+        obtenerAlumno(busqueda=''){
             db_sistema.transaction(tx=>{
                 tx.executeSql(`SELECT * FROM clientes WHERE nombre like "%${busqueda}%" OR codigo like "%${busqueda}%"`, [], (tx, results)=>{
                     this.clientes = results.rows;
@@ -75,14 +75,14 @@ var app = new Vue({
                 });
             });
         },
-        nuevoCliente(){
-            this.cliente.accion = 'nuevo';
-            this.cliente.idCliente = '';
-            this.cliente.codigo = '';
-            this.cliente.nombre = '';
-            this.cliente.direccion = '';
-            this.cliente.telefono = '';
-            this.cliente.dui = '';
+        nuevoAlumno(){
+            this.alumno.accion = 'nuevo';
+            this.alumno.idAlumno = '';
+            this.alumno.codigo = '';
+            this.alumno.nombre = '';
+            this.alumno.direccion = '';
+            this.alumno.telefono = '';
+            this.alumno.dui = '';
         }
     },
     created(){
@@ -92,6 +92,6 @@ var app = new Vue({
         }, err=>{
             console.log('Error al crear la tabla de clientes', err);
         });
-        this.obtenerClientes();
+        this.obtenerAlumno();
     }
 });
