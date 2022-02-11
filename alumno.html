@@ -44,9 +44,9 @@
                             </div>
                         </div>
                         <div class="row p-1">
-                            <div class="col col-md-1">DUI</div>
+                            <div class="col col-md-1">Municipio</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.dui" placeholder="tu DUI" pattern="[0-9]{8}-[0-9]{1}" required title="DUI de alumno" class="form-control" type="text">
+                                <input v-model="alumno.municipio" placeholder="tu DUI" pattern="[0-9]{8}-[0-9]{1}" required title="Municipio de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row">
@@ -85,7 +85,10 @@
                                 <th>Nombre</th>
                                 <th>Direccion</th>
                                 <th>Telefono</th>
-                                <th>DUI</th>
+                                <th>Municipio</th>
+                                <th>Departamento</th>
+                                <th>FechaDeNacimiento</th>
+                                <th>Sexo</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -95,7 +98,10 @@
                                 <td>{{alumno.nombre}}</td>
                                 <td>{{alumno.direccion}}</td>
                                 <td>{{alumno.telefono}}</td>
-                                <td>{{alumno.dui}}</td>
+                                <td>{{alumno.municipio}}</td>
+                                <td>{{alumno.departamento}}</td>
+                                <td>{{alumno.fechadenacimiento}}</td>
+                                <td>{{alumno.sexo}}</td>
                                 <td>
                                     <button type="button" class="btn btn-danger" @click="eliminarAlumno(alumno)">Eliminar</button>
                                 </td>
