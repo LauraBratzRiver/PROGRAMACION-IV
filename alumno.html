@@ -16,43 +16,43 @@
                     <div class="card-header text-white bg-dark">
                         REGISTRO ACADEMICO
 
-                        <button type="button" class="btn-close bg-white" data-bs-dismiss="alert" data-bs-target="#frmCliente" aria-label="Close"></button>
+                        <button type="button" class="btn-close bg-white" data-bs-dismiss="alert" data-bs-target="#frmAlumno" aria-label="Close"></button>
                     </div>
                     <div class="card-body">
                         <div class="row p-1">
                             <div class="col col-md-1">Codigo</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.codigo" placeholder="codigo" pattern="[A-Z0-9]{3,10}" required title="Codigo de cliente" class="form-control" type="text">
+                                <input v-model="alumno.codigo" placeholder="codigo" pattern="[A-Z0-9]{3,10}" required title="Codigo de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-1">Nombre</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.nombre" placeholder="escribe tu nombre" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Nombre de cliente" class="form-control" type="text">
+                                <input v-model="alumno.nombre" placeholder="escribe tu nombre" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Nombre de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-1">Direccion</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.direccion" placeholder="donde vives" pattern="[A-Za-z0-9Ã‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,100}" required title="Direccion de cliente" class="form-control" type="text">
+                                <input v-model="alumno.direccion" placeholder="donde vives" pattern="[A-Za-z0-9Ã‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,100}" required title="Direccion de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-1">Telefono</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.telefono" placeholder="tu tel" pattern="[0-9]{4}-[0-9]{4}" required title="Telefono de cliente" class="form-control" type="text">
+                                <input v-model="alumno.telefono" placeholder="tu tel" pattern="[0-9]{4}-[0-9]{4}" required title="Telefono de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-1">DUI</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.dui" placeholder="tu DUI" pattern="[0-9]{8}-[0-9]{1}" required title="DUI de cliente" class="form-control" type="text">
+                                <input v-model="alumno.dui" placeholder="tu DUI" pattern="[0-9]{8}-[0-9]{1}" required title="DUI de alumno" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col col-md-3 text-center">
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    {{ cliente.msg }}
+                                    {{ alumno.msg }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -66,11 +66,11 @@
                     </div>
                 </div>
             </form>
-            <div class="card mb-3" id="cardBuscarCliente">
+            <div class="card mb-3" id="cardBuscarAlumno">
                 <div class="card-header text-white bg-dark">
                     Busqueda de Alumnos
 
-                    <button type="button" class="btn-close bg-white" data-bs-dismiss="alert" data-bs-target="#cardBuscarCliente" aria-label="Close"></button>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="alert" data-bs-target="#cardBuscarAlumno" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
                     <table class="table">

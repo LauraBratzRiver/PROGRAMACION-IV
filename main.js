@@ -87,10 +87,10 @@ var app = new Vue({
     },
     created(){
         db_sistema.transaction(tx=>{
-            tx.executeSql('CREATE TABLE IF NOT EXISTS clientes(idCliente INTEGER PRIMARY KEY AUTOINCREMENT, '+
+            tx.executeSql('CREATE TABLE IF NOT EXISTS alumnos(idAlumno INTEGER PRIMARY KEY AUTOINCREMENT, '+
                 'codigo char(10), nombre char(75), direccion TEXT, telefono char(10), dui char(10))');
         }, err=>{
-            console.log('Error al crear la tabla de clientes', err);
+            console.log('Error al crear la tabla de alumnos', err);
         });
         this.obtenerAlumno();
     }
