@@ -30,47 +30,47 @@ var app = new Vue({
         guardarAlumno(){
             let sql = '',
                 parametros = [];
-            if(this.cliente.accion == 'nuevo'){
-                sql = 'INSERT INTO clientes (codigo, nombre, direccion, telefono, dui) VALUES (?,?,?,?,?)';
-                parametros = [this.cliente.codigo,this.cliente.nombre,this.cliente.direccion,this.cliente.telefono,this.cliente.dui];
-            }else if(this.cliente.accion == 'modificar'){
-                sql = 'UPDATE clientes SET codigo=?, nombre=?, direccion=?, telefono=?, dui=? WHERE idCliente=?';
-                parametros = [this.cliente.codigo,this.cliente.nombre,this.cliente.direccion,this.cliente.telefono,this.cliente.dui,this.cliente.idCliente];
-            }else if(this.cliente.accion == 'eliminar'){
-                sql = 'DELETE FROM clientes WHERE idCliente=?';
-                parametros = [this.cliente.idCliente];
+            if(this.alumno.accion == 'nuevo'){
+                sql = 'INSERT INTO alumnos (codigo, nombre, direccion, telefono, dui) VALUES (?,?,?,?,?)';
+                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.dui];
+            }else if(this.alumno.accion == 'modificar'){
+                sql = 'UPDATE alumnos SET codigo=?, nombre=?, direccion=?, telefono=?, dui=? WHERE idAlumno=?';
+                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.dui,this.alumno.idAlumno];
+            }else if(this.alumno.accion == 'eliminar'){
+                sql = 'DELETE FROM alumnos WHERE idAlumno=?';
+                parametros = [this.alumno.idAlumno];
             }
             db_sistema.transaction(tx=>{
                 tx.executeSql(sql,
                     parametros,
                 (tx, results)=>{
-                    this.cliente.msg = 'Cliente procesado con exito';
-                    this.nuevoCliente();
-                    this.obtenerClientes();
+                    this.alumno.msg = 'Registro de alumno procesado con exito';
+                    this.nuevoAlumno();
+                    this.obtenerAlumno();
                 },
                 (tx, error)=>{
-                    this.cliente.msg = `Error al guardar el cliente ${error.message}`;
+                    this.alumno.msg = `Error al guardar el alumno ${error.message}`;
                 });
             });
         },
         modificarAlumno(alumno){
-            this.cliente = cliente;
-            this.cliente.accion = 'modificar';
+            this.alumno = alumno;
+            this.alumno.accion = 'modificar';
         },
         eliminarAlumno(alumno){
-            if( confirm(`¿Esta seguro de eliminar el cliente ${cliente.nombre}?`) ){
-                this.cliente.idCliente = cliente.idCliente;
-                this.cliente.accion = 'eliminar';
-                this.guardarCliente();
+            if( confirm(`¿Esta seguro de eliminar el registro ${alumno.nombre}?`) ){
+                this.alumno.idAlumno = alumno.idAlumno;
+                this.alumno.accion = 'eliminar';
+                this.guardarAlumno();
             }
         },
         obtenerAlumno(busqueda=''){
             db_sistema.transaction(tx=>{
-                tx.executeSql(`SELECT * FROM clientes WHERE nombre like "%${busqueda}%" OR codigo like "%${busqueda}%"`, [], (tx, results)=>{
+                tx.executeSql(`SELECT * FROM alumnos WHERE nombre like "%${busqueda}%" OR codigo like "%${busqueda}%"`, [], (tx, results)=>{
                     this.clientes = results.rows;
-                    /*this.clientes = [];
+                    /*this.alumnos = [];
                     for(let i=0; i<results.rows.length; i++){
-                        this.clientes.push(results.rows.item(i));
+                        this.alumnos.push(results.rows.item(i));
                     }*/
                 });
             });
