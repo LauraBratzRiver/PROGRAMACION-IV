@@ -44,10 +44,30 @@
                             </div>
                         </div>
                         <div class="row p-1">
-                            <div class="col col-md-1">Municipio</div>
+                            <div class="col col-md-1">municipio</div>
                             <div class="col col-md-2">
-                                <input v-model="alumno.municipio" placeholder="tu DUI" pattern="[0-9]{8}-[0-9]{1}" required title="Municipio de alumno" class="form-control" type="text">
+                                <input v-model="alumno.municipio" placeholder="tu Municipio" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Municipio de alumno" class="form-control" type="text">
                             </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col col-md-1">departamento</div>
+                            <div class="col col-md-2">
+                                    <input v-model="alumno.departamento" placeholder="tu Departamento" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Municipio de alumno" class="form-control" type="text">
+                                </div>
+                            </div>
+
+                        <div class="row p-1">
+                             <div class="col col-md-1">Fecha de Nacimiento</div>
+                            <div class="col col-md-2">
+                                        <input v-model="alumno.fechadenacimiento" placeholder="tu FechaDeNacimiento" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Fecha de nacimiento de alumno" class="form-control" type="text">
+                                    </div>
+                                </div>
+
+                         <div class="row p-1">
+                                <div class="col col-md-1">Sexo</div>
+                                        <div class="col col-md-2">
+                                            <input v-model="alumno.sexo" placeholder="tu sexo" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Sexo de alumno" class="form-control" type="text">
+                                        </div>
                         </div>
                         <div class="row">
                             <div class="col col-md-3 text-center">
@@ -93,16 +113,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="alumno in alumnos" :key="cliente.idAlumno" @click="modificarAlumno(alumno)">
-                                <td>{{alumno.codigo}}</td>
-                                <td>{{alumno.nombre}}</td>
-                                <td>{{alumno.direccion}}</td>
-                                <td>{{alumno.telefono}}</td>
-                                <td>{{alumno.municipio}}</td>
-                                <td>{{alumno.departamento}}</td>
-                                <td>{{alumno.fechadenacimiento}}</td>
-                                <td>{{alumno.sexo}}</td>
+                            <tr v-for="item in clientes" :key="item.idCliente" @click="modificarCliente(item)">
+                                <td>{{item.codigo}}</td>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.direccion}}</td>
+                                <td>{{item.telefono}}</td>
+                                <td>{{item.municipio}}</td>
+                                <td>{{item.departamento}}</td>
+                                <td>{{item.fechadenacimiento}}</td>
+                                <td>{{item.sexo}}</td>
                                 <td>
+                         
                                     <button type="button" class="btn btn-danger" @click="eliminarAlumno(alumno)">Eliminar</button>
                                 </td>
                             </tr>
