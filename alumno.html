@@ -11,7 +11,7 @@
 <body>
     <div id="appRegistroAcademico">
         <div class="container-fluid">
-            <form @submit.prevent="guardarAlumno" method="post" id="frmAlumno">
+            <form @submit.prevent="guardarAlumno" @reset.prevent="nuevoUsuario" method="post" id="frmAlumno">
                 <div class="card mb-3">
                     <div class="card-header text-white bg-dark">
                         REGISTRO ACADEMICO
@@ -46,6 +46,12 @@
                         <div class="row p-1">
                             <div class="col col-md-1">municipio</div>
                             <div class="col col-md-2">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
                                 <input v-model="alumno.municipio" placeholder="tu Municipio" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Municipio de alumno" class="form-control" type="text">
                             </div>
                         </div>
@@ -66,8 +72,15 @@
                          <div class="row p-1">
                                 <div class="col col-md-1">Sexo</div>
                                         <div class="col col-md-2">
-                                            <input v-model="alumno.sexo" placeholder="tu sexo" pattern="[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³Ãº ]{3,75}" required title="Sexo de alumno" class="form-control" type="text">
-                                        </div>
+                                        <select v-model="alumno.sexo" class="form-control" aria-label="sexo">
+                                                <option selected>Seleccione su sexo:</option>
+                                                <option value="1">Masculino</option>
+                                                <option value="2">Femenino</option>
+                                                
+                                             
+    
+                                        </div> 
+                                    </select>
                         </div>
                         <div class="row">
                             <div class="col col-md-3 text-center">
@@ -113,7 +126,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in clientes" :key="item.idCliente" @click="modificarCliente(item)">
+                            <tr v-for="alumno in Alumnos" :key="item.idAlumno" @click="modificarAlumno(item)">
                                 <td>{{item.codigo}}</td>
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.direccion}}</td>

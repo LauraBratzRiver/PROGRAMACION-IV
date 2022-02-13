@@ -5,7 +5,6 @@ if(!db_sistema){
 var app = new Vue({
     el: '#appRegistroAcademico',
     data: {
-        alumnos: [],
         buscar: '',
         alumno: {
             accion: 'nuevo',
@@ -34,13 +33,13 @@ var app = new Vue({
             let sql = '',
                 parametros = [];
             if(this.alumno.accion == 'nuevo'){
-                sql = 'INSERT INTO alumnos (codigo, nombre, direccion, telefono, municipio, departamento, fechadenacimiento, sexo) VALUES (?,?,?,?,?,?,?,?)';
-                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.municipio,this.alumno.departamento,this.alumno.fechadenacimiento,this.alumno.sexo];
+                sql = 'INSERT INTO alumno(codigo, nombre, direccion, telefono, municipio, departamento, fechadenacimiento, sexo) VALUES (?,?,?,?,?,?,?,?)';
+                parametros = [this.alumno.codigo, this.alumno.nombre, this.alumno.direccion, this.alumno.telefono, this.alumno.municipio, this.alumno.departamento, this.alumno.fechadenacimiento, this.alumno.sexo];
             }else if(this.alumno.accion == 'modificar'){
-                sql = 'UPDATE alumnos SET codigo=?, nombre=?, direccion=?, telefono=?, municipio=?, departamento=?, fechadenacimiento=?, sexo=? WHERE idAlumno=?';
-                parametros = [this.alumno.codigo,this.alumno.nombre,this.alumno.direccion,this.alumno.telefono,this.alumno.municipio,this.alumno.departamento,this.alumno.fechadenacimiento,this.alumno.sexo,this.alumno.idAlumno];
+                sql = 'UPDATE alumno SET codigo=?, nombre=?, direccion=?, telefono=?, municipio=?, departamento=?, fechadenacimiento=?, sexo=? WHERE idAlumno=?';
+                parametros = [this.alumno.codigo, this.alumno.nombre, this.alumno.direccion, this.alumno.telefono, this.alumno.municipio, this.alumno.departamento, this.alumno.fechadenacimiento, this.alumno.sexo, this.alumno.idAlumno];
             }else if(this.alumno.accion == 'eliminar'){
-                sql = 'DELETE FROM alumnos WHERE idAlumno=?';
+                sql = 'DELETE FROM alumno WHERE idAlumno=?';
                 parametros = [this.alumno.idAlumno];
             }
             db_sistema.transaction(tx=>{
@@ -92,8 +91,8 @@ var app = new Vue({
     },
     created(){
         db_sistema.transaction(tx=>{
-            tx.executeSql('CREATE TABLE IF NOT EXISTS alumnos(idAlumno INTEGER PRIMARY KEY AUTOINCREMENT, '+
-                'codigo char(10), nombre char(75), direccion TEXT, telefono char(10), municipio char(75), departamento TEXT, fechadenacimiento TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS alumno(idAlumno INTEGER PRIMARY KEY AUTOINCREMENT, '+
+                'codigo char(10), nombre char(75), direccion TEXT, telefono char(10), municipio TEXT, departamento TEXT, fechadenacimiento TEXT, sexo TEXT)');
         }, err=>{
             console.log('Error al crear la tabla de alumnos', err);
         });
