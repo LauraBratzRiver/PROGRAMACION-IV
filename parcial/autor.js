@@ -41,7 +41,7 @@ Vue.component('autor', {
             this.autor.accion = 'modificar';
         },
         eliminarAutor(data){
-            if( confirm(`¿Esta seguro de eliminar el autor ${data.nombre}?`) ){
+            if( confirm(`¿Esta seguro de eliminar el autor ${data.autor}?`) ){
                 this.autor.idAutor = data.idAutor;
                 this.autor.accion = 'eliminar';
                 this.guardarAutor();
@@ -53,7 +53,7 @@ Vue.component('autor', {
                 for(let i=0; i<JSON.parse(localStorage.getItem('autores')).length; i++){
                     let data = JSON.parse(localStorage.getItem('autores'))[i];
                     if( this.buscar.length>0 ){
-                        if( data.nombre.toLowerCase().indexOf(this.buscar.toLowerCase())>-1 ){
+                        if( data.autor.toLowerCase().indexOf(this.buscar.toLowerCase())>-1 ){
                             this.autores.push(data);
                         }
                     }else{
