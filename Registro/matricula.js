@@ -9,6 +9,7 @@ Vue.component('matricula', {
                 msg : '',
                 idMatricula : '',
                 codigoAlumno : '',
+                nombreAlumno: '',
                 nombreMateria: '',
                 fecha : '',
                 Docente: '',
@@ -60,6 +61,7 @@ Vue.component('matricula', {
             this.matricula.msg = '';
             this.matricula.idMatricula = '',
             this.matricula.codigoAlumno = '',
+            this.matricula.nombreAlumno= '',
             this.matricula.nombreMateria = '',
             this.matricula.fecha = '',
             this.matricula.Docente = '',
@@ -72,21 +74,27 @@ Vue.component('matricula', {
     },
     template:`
     <div id="appCiente">
-    <div class="card text-white" id="carmatricula">
+    <div class="card text-white" id="carMatricula">
                 <div class="card-header bg-info">
                     Registro de matriculas
                   
 
-                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carmatricula" aria-label="Close"></button>
+                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carMatricula" aria-label="Close"></button>
                 </div>
                 <div class="card-body text-dark">
-                    <form method="post" @submit.prevent="guardarmatricula" @reset="nuevomatricula">
+                    <form method="post" @submit.prevent="guardarMatricula" @reset="nuevoMatricula">
                         <div class="row p-1">
                             <div class="col col-md-2">Codigo de alumno:</div>
                             <div class="col col-md-2">
                                 <input title="Ingrese el codigo" v-model="matricula.codigoAlumno" pattern="[0-9]{3,10}" required type="text" class="form-control">
                             </div>
                         </div>
+                        <div class="row p-1">
+                        <div class="col col-md-2">Nombre de Alumno:</div>
+                        <div class="col col-md-2">
+                            <input title="Ingrese el nombre del alumno" v-model="matricula.nombreAlumno" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                        </div>
+                    </div>
                         <div class="row p-1">
                         <div class="col col-md-2">Nombre de Materia:</div>
                         <div class="col col-md-2">
@@ -142,6 +150,7 @@ Vue.component('matricula', {
                             </tr>
                             <tr>
                                 <th>CodigoAlumno</th>
+                                <th>NombreAlumno</th>
                                 <th>NombreMateria</th>
                                 <th>Fecha</th>
                                 <th>DOCENTE</th>
@@ -153,6 +162,7 @@ Vue.component('matricula', {
                         <tbody>
                             <tr v-for="item in matriculas" @click='modificarMatricula( item )' :key="item.idMatricula">
                                 <td>{{item.codigoAlumno}}</td>
+                                <td>{{item.nombreAlumno}}</td>
                                 <td>{{item.nombreMateria}}</td>
                                 <td>{{item.fecha}}</td>
                                 <td>{{item.Docente}}</td>
