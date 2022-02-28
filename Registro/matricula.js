@@ -87,13 +87,15 @@ Vue.component('matricula', {
                             <div class="col col-md-2">Codigo de alumno:</div>
                             <div class="col col-md-2">
                                 <input title="Ingrese el codigo" v-model="matricula.codigoAlumno" pattern="[0-9]{3,10}" required type="text" class="form-control">
+                                
                             </div>
                         </div>
                         <div class="row p-1">
                         <div class="col col-md-2">Nombre de Alumno:</div>
                         <div class="col col-md-2">
                             <input title="Ingrese el nombre del alumno" v-model="matricula.nombreAlumno" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
-                        </div>
+                              
+                            </div>
                     </div>
                         <div class="row p-1">
                         <div class="col col-md-2">Nombre de Materia:</div>

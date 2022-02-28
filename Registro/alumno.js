@@ -113,7 +113,7 @@ Vue.component('alumno',{
                             <div class="row p-1">
                             <div class="col col-md-2">SEXO:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el sexo" v-model="alumno.sexo" pattern="[Masculino-Femenino]{1,2}" required type="select" class="form-control">
+                                <input title="Ingrese el sexo" v-model="alumno.sexo" pattern="[Masculino-Femenino]{1,2}" required type="sex" class="form-control">
                 
                          </div>
                         </div>
