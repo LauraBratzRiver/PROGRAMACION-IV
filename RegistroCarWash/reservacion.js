@@ -1,4 +1,4 @@
-Vue.component('matricula', {
+Vue.component('reservacion', {
     data:()=>{
         return {
             buscar:'',

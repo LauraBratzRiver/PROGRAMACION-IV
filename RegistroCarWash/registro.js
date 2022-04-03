@@ -1,4 +1,4 @@
-Vue.component('materia',{
+Vue.component('registro',{
     data:()=>{
         return {
             buscar:'',
