@@ -2,12 +2,12 @@ Vue.component('registro',{
     data:()=>{
         return {
             buscar:'',
-            materias:[],
-            materia:{
+            registros:[],
+            registro:{
                 accion : 'nuevo',
                 mostrar_msg : false,
                 msg : '',
-                idMateria : '',
+                idregistro : '',
                 codigo: '',
                 nombre: '',
                 docente: '',
@@ -16,87 +16,87 @@ Vue.component('registro',{
         }
     },
     methods:{
-        buscandoMateria(){
-            this.obtenerMaterias(this.buscar);
+        buscandoregistro(){
+            this.obtenerregistros(this.buscar);
         },
-        eliminarMateria(materia){
-            if( confirm(`Esta seguro de eliminar el materia ${materia.nombre}?`) ){
-                this.materia.accion = 'eliminar';
-                this.materia.idMateria = materia.idMateria;
-                this.guardarMateria();
+        eliminarregistro(registro){
+            if( confirm(`Esta seguro de eliminar el registro ${registro.nombre}?`) ){
+                this.registro.accion = 'eliminar';
+                this.registro.idregistro = registro.idregistro;
+                this.guardarregistro();
             }
-            this.nuevoMateria();
+            this.nuevoregistro();
         },
-        modificarMateria(datos){
-            this.materia = JSON.parse(JSON.stringify(datos));
-            this.materia.accion = 'modificar';
+        modificarregistro(datos){
+            this.registro = JSON.parse(JSON.stringify(datos));
+            this.registro.accion = 'modificar';
         },
-        guardarMateria(){
-            this.obtenerMaterias();
-            let materias = JSON.parse(localStorage.getItem('materias')) || [];
-            if(this.materia.accion=="nuevo"){
-                this.materia.idMateria = generarIdUnicoFecha();
-                materias.push(this.materia);
-            } else if(this.materia.accion=="modificar"){
-                let index = materias.findIndex(materia=>materia.idMateria==this.materia.idMateria);
-                materias[index] = this.materia;
-            } else if( this.materia.accion=="eliminar" ){
-                let index = materias.findIndex(materia=>materia.idMateria==this.materia.idMateria);
-                materias.splice(index,1);
+        guardarregistro(){
+            this.obtenerregistros();
+            let registros = JSON.parse(localStorage.getItem('registros')) || [];
+            if(this.registro.accion=="nuevo"){
+                this.registro.idregistro = generarIdUnicoFecha();
+                registros.push(this.registro);
+            } else if(this.registro.accion=="modificar"){
+                let index = registros.findIndex(registro=>registro.idregistro==this.registro.idregistro);
+                registros[index] = this.registro;
+            } else if( this.registro.accion=="eliminar" ){
+                let index = registros.findIndex(registro=>registro.idregistro==this.registro.idregistro);
+                registros.splice(index,1);
             }
-            localStorage.setItem('materias', JSON.stringify(materias));
-            this.nuevoMateria();
-            this.obtenerMaterias();
-            this.materia.msg = 'Materia procesado con exito';
+            localStorage.setItem('registros', JSON.stringify(registros));
+            this.nuevoregistro();
+            this.obtenerregistros();
+            this.registro.msg = 'registro procesado con exito';
         },
-        obtenerMaterias(valor=''){
-            this.materias = [];
-            let materias = JSON.parse(localStorage.getItem('materias')) || [];
-            this.materias = materias.filter(materia=>materia.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+        obtenerregistros(valor=''){
+            this.registros = [];
+            let registros = JSON.parse(localStorage.getItem('registros')) || [];
+            this.registros = registros.filter(registro=>registro.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
         },
-        nuevoMateria(){
-            this.materia.accion = 'nuevo';
-            this.materia.msg = '';
-            this.materia.idMateria = '';
-            this.materia.codigo = '';
-            this.materia.nombre = '';
-            this.materia.docente = '';
+        nuevoregistro(){
+            this.registro.accion = 'nuevo';
+            this.registro.msg = '';
+            this.registro.idregistro = '';
+            this.registro.codigo = '';
+            this.registro.nombre = '';
+            this.registro.docente = '';
         }
     },
     created(){
-        this.obtenerMaterias();
+        this.obtenerregistros();
     },
     template:`
         <div id="appCiente">
-            <div class="card text-white" id="carMateria">
+            <div class="card text-white" id="carregistro">
                 <div class="card-header bg-info">
-                    Registro de Materias
+                    Registro de registros
 
-                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carMateria" aria-label="Close"></button>
+                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carregistro" aria-label="Close"></button>
                 </div>
                 <div class="card-body text-dark">
-                    <form method="post" @submit.prevent="guardarMateria" @reset="nuevoMateria">
+                    <form method="post" @submit.prevent="guardarregistro" @reset="nuevoregistro">
                         <div class="row p-1">
                             <div class="col col-md-2">Codigo:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el codigo" v-model="materia.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
+                                <input title="Ingrese el codigo" v-model="registro.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-2">Nombre:</div>
                             <div class="col col-md-3">
-                                <input title="Ingrese el nombre" v-model="materia.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                                <input title="Ingrese el nombre" v-model="registro.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
                             </div>
                             <div class="row p-1">
                             <div class="col col-md-2">Docente:</div>
                             <div class="col col-md-3">
-                                <input title="Ingrese el docente" v-model="materia.docente" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                                <input title="Ingrese el docente" v-model="registro.docente" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-5 text-center">
-                                <div v-if="materia.mostrar_msg" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    {{ materia.msg }}
+                                <div v-if="registro.mostrar_msg" class="alert alert-info alert-dismissible fade show" role="alert">
+                                    {{ registro.msg }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -110,18 +110,18 @@ Vue.component('registro',{
                     </form>
                 </div>
             </div>
-            <div class="card text-white" id="carBuscarMateria">
+            <div class="card text-white" id="carBuscarregistro">
                 <div class="card-header bg-info">
-                    Busqueda de Materias
+                    Busqueda de registros
 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarMateria" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarregistro" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
                                 <th colspan="6">
-                                    Buscar: <input @keyup="buscandoMateria" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
+                                    Buscar: <input @keyup="buscandoregistro" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
                                 </th>
                             </tr>
                             <tr>
@@ -132,12 +132,12 @@ Vue.component('registro',{
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in materias" @click='modificarMateria( item )' :key="item.idMateria">
+                            <tr v-for="item in registros" @click='modificarregistro( item )' :key="item.idregistro">
                                 <td>{{item.codigo}}</td>
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.docente}}</td>
                                 <td>
-                                    <button class="btn btn-danger" @click="eliminarMateria(item)">Eliminar</button>
+                                    <button class="btn btn-danger" @click="eliminarregistro(item)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>

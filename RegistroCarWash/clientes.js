@@ -2,12 +2,12 @@ Vue.component('clientes',{
     data:()=>{
         return {
             buscar:'',
-            alumnos:[],
-            alumno:{
+            Clientes:[],
+            cliente:{
                 accion : 'nuevo',
                 mostrar_msg : false,
                 msg : '',
-                idAlumno : '',
+                idcliente : '',
                 codigo: '',
                 nombre: '',
                 direccion: '',
@@ -18,110 +18,110 @@ Vue.component('clientes',{
         }
     },
     methods:{
-        buscandoAlumno(){
-            this.obtenerAlumnos(this.buscar);
+        buscandocliente(){
+            this.obtenerClientes(this.buscar);
         },
-        eliminarAlumno(alumno){
-            if( confirm(`Esta seguro de eliminar el alumno ${alumno.nombre}?`) ){
-                this.alumno.accion = 'eliminar';
-                this.alumno.idAlumno = alumno.idAlumno;
-                this.guardarAlumno();
+        eliminarcliente(cliente){
+            if( confirm(`Esta seguro de eliminar el cliente ${cliente.nombre}?`) ){
+                this.cliente.accion = 'eliminar';
+                this.cliente.idcliente = cliente.idcliente;
+                this.guardarcliente();
             }
-            this.nuevoAlumno();
+            this.nuevocliente();
         },
-        modificarAlumno(datos){
-            this.alumno = JSON.parse(JSON.stringify(datos));
-            this.alumno.accion = 'modificar';
+        modificarcliente(datos){
+            this.cliente = JSON.parse(JSON.stringify(datos));
+            this.cliente.accion = 'modificar';
         },
-        guardarAlumno(){
-            this.obtenerAlumnos();
-            let alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
-            if(this.alumno.accion=="nuevo"){
-                this.alumno.idAlumno = generarIdUnicoFecha();
-                alumnos.push(this.alumno);
-            } else if(this.alumno.accion=="modificar"){
-                let index = alumnos.findIndex(alumno=>alumno.idAlumno==this.alumno.idAlumno);
-                alumnos[index] = this.alumno;
-            } else if( this.alumno.accion=="eliminar" ){
-                let index = alumnos.findIndex(alumno=>alumno.idAlumno==this.alumno.idAlumno);
-                alumnos.splice(index,1);
+        guardarcliente(){
+            this.obtenerClientes();
+            let Clientes = JSON.parse(localStorage.getItem('Clientes')) || [];
+            if(this.cliente.accion=="nuevo"){
+                this.cliente.idcliente = generarIdUnicoFecha();
+                Clientes.push(this.cliente);
+            } else if(this.cliente.accion=="modificar"){
+                let index = Clientes.findIndex(cliente=>cliente.idcliente==this.cliente.idcliente);
+                Clientes[index] = this.cliente;
+            } else if( this.cliente.accion=="eliminar" ){
+                let index = Clientes.findIndex(cliente=>cliente.idcliente==this.cliente.idcliente);
+                Clientes.splice(index,1);
             }
-            localStorage.setItem('alumnos', JSON.stringify(alumnos));
-            this.nuevoAlumno();
-            this.obtenerAlumnos();
-            this.alumno.msg = 'Alumno procesado con exito';
+            localStorage.setItem('Clientes', JSON.stringify(Clientes));
+            this.nuevocliente();
+            this.obtenerClientes();
+            this.cliente.msg = 'cliente procesado con exito';
         },
-        obtenerAlumnos(valor=''){
-            this.alumnos = [];
-            let alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
-            this.alumnos = alumnos.filter(alumno=>alumno.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
+        obtenerClientes(valor=''){
+            this.Clientes = [];
+            let Clientes = JSON.parse(localStorage.getItem('Clientes')) || [];
+            this.Clientes = Clientes.filter(cliente=>cliente.nombre.toLowerCase().indexOf(valor.toLowerCase())>-1);
         },
-        nuevoAlumno(){
-            this.alumno.accion = 'nuevo';
-            this.alumno.msg = '';
-            this.alumno.idAlumno = '';
-            this.alumno.codigo = '';
-            this.alumno.nombre = '';
-            this.alumno.direccion = '';
-            this.alumno.telefono = '';
-            this.alumno.nacimiento = '';
-            this.alumno.sexo = '';
+        nuevocliente(){
+            this.cliente.accion = 'nuevo';
+            this.cliente.msg = '';
+            this.cliente.idcliente = '';
+            this.cliente.codigo = '';
+            this.cliente.nombre = '';
+            this.cliente.direccion = '';
+            this.cliente.telefono = '';
+            this.cliente.nacimiento = '';
+            this.cliente.sexo = '';
         }
     },
     created(){
-        this.obtenerAlumnos();
+        this.obtenerClientes();
     },
     template:`
         <div id="appCiente">
-            <div class="card text-white" id="carAlumno">
+            <div class="card text-white" id="carcliente">
                 <div class="card-header bg-info">
-                    Registro de Alumnos
+                    Registro de Clientes
 
-                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carAlumno" aria-label="Close"></button>
+                    <button type="button" class="btn-close text-end" data-bs-dismiss="alert" data-bs-target="#carcliente" aria-label="Close"></button>
                 </div>
                 <div class="card-body text-dark">
-                    <form method="post" @submit.prevent="guardarAlumno" @reset="nuevoAlumno">
+                    <form method="post" @submit.prevent="guardarcliente" @reset="nuevocliente">
                         <div class="row p-1">
                             <div class="col col-md-2">Codigo:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el codigo" v-model="alumno.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
+                                <input title="Ingrese el codigo" v-model="cliente.codigo" pattern="[0-9]{3,10}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-2">Nombre:</div>
                             <div class="col col-md-3">
-                                <input title="Ingrese el nombre" v-model="alumno.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                                <input title="Ingrese el nombre" v-model="cliente.nombre" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-2">Direccion:</div>
                             <div class="col col-md-3">
-                                <input title="Ingrese la direccion" v-model="alumno.direccion" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control">
+                                <input title="Ingrese la direccion" v-model="cliente.direccion" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-2">Telefono:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el tel" v-model="alumno.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
+                                <input title="Ingrese el tel" v-model="cliente.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
                             </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-2">NACIMIENTO:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el NACIMIENTO" v-model="alumno.nacimiento" pattern="[0-9]{2}{4}-[0-9]{2,4}" required type="date" class="form-control">
+                                <input title="Ingrese el NACIMIENTO" v-model="cliente.nacimiento" pattern="[0-9]{2}{4}-[0-9]{2,4}" required type="date" class="form-control">
                             </div>
                             <div class="row p-1">
                             <div class="col col-md-2">SEXO:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el sexo" v-model="alumno.sexo" pattern="[Masculino-Femenino]{1,2}" required type="sex" class="form-control">
+                                <input title="Ingrese el sexo" v-model="cliente.sexo" pattern="[Masculino-Femenino]{1,2}" required type="sex" class="form-control">
                 
                          </div>
                         </div>
                         </div>
                         <div class="row p-1">
                             <div class="col col-md-5 text-center">
-                                <div v-if="alumno.mostrar_msg" class="alert alert-info alert-dismissible fade show" role="alert">
-                                    {{ alumno.msg }}
+                                <div v-if="cliente.mostrar_msg" class="alert alert-info alert-dismissible fade show" role="alert">
+                                    {{ cliente.msg }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -135,18 +135,18 @@ Vue.component('clientes',{
                     </form>
                 </div>
             </div>
-            <div class="card text-white" id="carBuscarAlumno">
+            <div class="card text-white" id="carBuscarcliente">
                 <div class="card-header bg-info">
-                    Busqueda de Alumnos
+                    Busqueda de Clientes
 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarAlumno" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#carBuscarcliente" aria-label="Close"></button>
                 </div>
                 <div class="card-body">
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
                                 <th colspan="6">
-                                    Buscar: <input @keyup="buscandoAlumno" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
+                                    Buscar: <input @keyup="buscandocliente" v-model="buscar" placeholder="buscar aqui" class="form-control" type="text" >
                                 </th>
                             </tr>
                             <tr>
@@ -160,7 +160,7 @@ Vue.component('clientes',{
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in alumnos" @click='modificarAlumno( item )' :key="item.idAlumno">
+                            <tr v-for="item in Clientes" @click='modificarcliente( item )' :key="item.idcliente">
                                 <td>{{item.codigo}}</td>
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.direccion}}</td>
@@ -168,7 +168,7 @@ Vue.component('clientes',{
                                 <td>{{item.nacimiento}}</td>
                                 <td>{{item.sexo}}</td>
                                 <td>
-                                    <button class="btn btn-danger" @click="eliminarAlumno(item)">Eliminar</button>
+                                    <button class="btn btn-danger" @click="eliminarcliente(item)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
