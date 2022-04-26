@@ -10,7 +10,12 @@ Vue.component('registro',{
                 idregistro : '',
                 codigo: '',
                 nombre: '',
-                docente: '',
+                telefono: '',
+                direccion: '',
+                correo: '',
+                contraseña: '',
+                FechaNacimiento: '',
+                TipoAutomotor: ''
 
             }
         }
@@ -60,7 +65,14 @@ Vue.component('registro',{
             this.registro.idregistro = '';
             this.registro.codigo = '';
             this.registro.nombre = '';
-            this.registro.docente = '';
+            this.registro.telefono = '';
+            this.registro.direccion = '';
+            this.registro.correo = '';
+            this.registro.contraseña = '';
+            this.registro.FechaNacimiento = '';
+            this.registro.TipoAutomotor = '';
+
+            
         }
     },
     created(){
@@ -127,7 +139,7 @@ Vue.component('registro',{
                             <tr>
                                 <th>CODIGO</th>
                                 <th>NOMBRE</th>
-                                <th>DOCENTE</th>
+                                <th>AUTOMOTOR</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -135,7 +147,8 @@ Vue.component('registro',{
                             <tr v-for="item in registros" @click='modificarregistro( item )' :key="item.idregistro">
                                 <td>{{item.codigo}}</td>
                                 <td>{{item.nombre}}</td>
-                                <td>{{item.docente}}</td>
+                                <td>{{item.TipoAutomotor}}</td>
+                               
                                 <td>
                                     <button class="btn btn-danger" @click="eliminarregistro(item)">Eliminar</button>
                                 </td>

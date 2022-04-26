@@ -12,8 +12,7 @@ Vue.component('clientes',{
                 nombre: '',
                 direccion: '',
                 telefono: '',
-                nacimiento: '',
-                sexo: ''
+                automotor: ''
             }
         }
     },
@@ -64,8 +63,7 @@ Vue.component('clientes',{
             this.cliente.nombre = '';
             this.cliente.direccion = '';
             this.cliente.telefono = '';
-            this.cliente.nacimiento = '';
-            this.cliente.sexo = '';
+            this.cliente.automotor = '';
         }
     },
     created(){
@@ -105,15 +103,11 @@ Vue.component('clientes',{
                                 <input title="Ingrese el tel" v-model="cliente.telefono" pattern="[0-9]{4}-[0-9]{4}" required type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="row p-1">
-                            <div class="col col-md-2">NACIMIENTO:</div>
-                            <div class="col col-md-2">
-                                <input title="Ingrese el NACIMIENTO" v-model="cliente.nacimiento" pattern="[0-9]{2}{4}-[0-9]{2,4}" required type="date" class="form-control">
-                            </div>
+                    
                             <div class="row p-1">
-                            <div class="col col-md-2">SEXO:</div>
+                            <div class="col col-md-2">AUTOMOTOR:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el sexo" v-model="cliente.sexo" pattern="[Masculino-Femenino]{1,2}" required type="sex" class="form-control">
+                                <input title="Ingrese tipo de automotor" v-model="cliente.automotor" pattern="[A-Za-zñÑáéíóúü ]{3,100}" required type="text" class="form-control">
                 
                          </div>
                         </div>
@@ -154,8 +148,7 @@ Vue.component('clientes',{
                                 <th>NOMBRE</th>
                                 <th>DIRECCION</th>
                                 <th>TEL</th>
-                                <th>NACIMIENTO</th>
-                                <th>SEXO</th>
+                                <th>AUTOMOTOR</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -165,8 +158,7 @@ Vue.component('clientes',{
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.direccion}}</td>
                                 <td>{{item.telefono}}</td>
-                                <td>{{item.nacimiento}}</td>
-                                <td>{{item.sexo}}</td>
+                                <td>{{item.automotor}}</td>
                                 <td>
                                     <button class="btn btn-danger" @click="eliminarcliente(item)">Eliminar</button>
                                 </td>

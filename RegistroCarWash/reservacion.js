@@ -8,12 +8,11 @@ Vue.component('reservacion', {
                 mostrar_msg : false,
                 msg : '',
                 idreservacion : '',
-                codigoAlumno : '',
-                nombreAlumno: '',
-                nombreMateria: '',
+                codigo: '',
+                nombre: '',
                 fecha : '',
-                Docente: '',
-                aula : ''
+                hora : '',
+                TipoReservacion : '',
             }
         }
     },
@@ -54,18 +53,17 @@ Vue.component('reservacion', {
         obtenerreservacion(valor=''){
             this.reservaciones = [];
             let reservaciones = JSON.parse(localStorage.getItem('reservaciones')) || [];
-            this.reservaciones = reservaciones.filter(reservacion=>reservacion.nombreMateria.toLowerCase().indexOf(valor.toLowerCase())>-1);
+            this.reservaciones = reservaciones.filter(reservacion=>reservacion.TipoReservacion.toLowerCase().indexOf(valor.toLowerCase())>-1);
         },
         nuevoreservacion(){
             this.reservacion.accion = 'nuevo';
             this.reservacion.msg = '';
             this.reservacion.idreservacion = '',
-            this.reservacion.codigoAlumno = '',
-            this.reservacion.nombreAlumno= '',
-            this.reservacion.nombreMateria = '',
+            this.reservacion.codigo = '',
+            this.reservacion.nombre = '',
             this.reservacion.fecha = '',
-            this.reservacion.Docente = '',
-            this.reservacion.aula = ''
+            this.reservacion.hora = '',
+            this.reservacion.TipoReservacion = '';
 
         }
     },
@@ -84,41 +82,30 @@ Vue.component('reservacion', {
                 <div class="card-body text-dark">
                     <form method="post" @submit.prevent="guardarreservacion" @reset="nuevoreservacion">
                         <div class="row p-1">
-                            <div class="col col-md-2">Codigo de alumno:</div>
+                            <div class="col col-md-2">Codigo de cliente:</div>
                             <div class="col col-md-2">
-                                <input title="Ingrese el codigo" v-model="reservacion.codigoAlumno" pattern="[0-9]{3,10}" required type="text" class="form-control">
+                                <input title="Ingrese el codigo" v-model="reservacion.codigoCliente" pattern="[0-9]{3,10}" required type="text" class="form-control">
                                 
                             </div>
                         </div>
                         <div class="row p-1">
-                        <div class="col col-md-2">Nombre de Alumno:</div>
+                        <div class="col col-md-2">Nombre de Cliente:</div>
                         <div class="col col-md-2">
-                            <input title="Ingrese el nombre del alumno" v-model="reservacion.nombreAlumno" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                            <input title="Ingrese el nombre del cliente" v-model="reservacion.nombreCliente" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
                               
                             </div>
-                    </div>
-                        <div class="row p-1">
-                        <div class="col col-md-2">Nombre de Materia:</div>
-                        <div class="col col-md-2">
-                            <input title="Ingrese el nombre de la materia" v-model="reservacion.nombreMateria" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
-                        </div>
-                    </div>
-                        <div class="row p-1">
-                        <div class="col col-md-2">Fecha de Inscripcion:</div>
-                        <div class="col col-md-3">
-                            <input title="Ingrese el dia de inscripcion" v-model="reservacion.fecha" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="date" class="form-control">
-                        </div>
-                        <div class="row p-1">
-                            <div class="col col-md-2">Docente:</div>
-                            <div class="col col-md-3">
-                                <input title="Ingrese el nombre del docente" v-model="reservacion.Docente" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
-                            </div>
+
                             <div class="row p-1">
-                            <div class="col col-md-2">Aula:</div>
-                            <div class="col col-md-3">
-                                <input title="Ingrese el aula" v-model="reservacion.aula" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
-                            </div>
-                        </div>
+                            <div class="col col-md-2">Fecha de Reservacion:</div>
+                            <div class="col col-md-2">
+                                <input title="Ingrese el nombre del cliente" v-model="reservacion.fecha" pattern="[A-Za-zñÑáéíóúü ]{3,75}" required type="text" class="form-control">
+                                  
+                                </div>
+                    </div>
+                       
+                    </div>
+                       
+                       
                         <div class="row p-1">
                             <div class="col col-md-5 text-center">
                                 <div v-if="reservacion.mostrar_msg" class="alert alert-info alert-dismissible fade show" role="alert">
@@ -151,24 +138,20 @@ Vue.component('reservacion', {
                                 </th>
                             </tr>
                             <tr>
-                                <th>CodigoAlumno</th>
-                                <th>NombreAlumno</th>
-                                <th>NombreMateria</th>
+                                <th>CodigoCliente</th>
+                            
                                 <th>Fecha</th>
-                                <th>DOCENTE</th>
-                                <th>Aula</th>
+                              
                                 
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="item in reservaciones" @click='modificarreservacion( item )' :key="item.idreservacion">
-                                <td>{{item.codigoAlumno}}</td>
-                                <td>{{item.nombreAlumno}}</td>
-                                <td>{{item.nombreMateria}}</td>
+                                <td>{{item.codigoCliente}}</td>
+                                <td>{{item.nombre}}</td>
                                 <td>{{item.fecha}}</td>
-                                <td>{{item.Docente}}</td>
-                                <td>{{item.aula}}</td>
+
                                 <td>
                                     <button class="btn btn-danger" @click="eliminarreservacion(item)">Eliminar</button>
                                 </td>
